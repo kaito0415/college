@@ -5,6 +5,11 @@
 	<title>BLOG</title>
 </head>
 
+<x-app-layout>
+    <x-slot name="header">
+        
+    </x-slot>
+
 <body>
 	<h1>投稿一覧</h1>
 	<div class="posts">
@@ -13,6 +18,7 @@
 				<h2 class="title">
 					<a href="/posts/{{$post->id}}">{{$post->title}}</a>
 				</h2>　
+				<a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
 				<p class="body">{{ $post->body }}</p>
 				<form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
 					@csrf
@@ -26,6 +32,7 @@
 		{{$posts->links()}}
 	</div>
 	<a href='posts/create'>投稿作成</a>
+	<p class="loginUser">ログインユーザー：{{ Auth::user()->name }}</p>
 	
 	<script>
 	function deletePost(id){
@@ -38,5 +45,6 @@
 	</script>
 
 </body>
+</x-app-layout>
 
 </html>
